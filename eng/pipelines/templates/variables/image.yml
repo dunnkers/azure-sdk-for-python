@@ -9,7 +9,7 @@ variables:
     value: Azure Pipelines
 
   - name: LINUXVMIMAGE
-    value: azsdk-pool-mms-ubuntu-2004-1espt
+    value: azsdk-pool-mms-ubuntu-2004-1espt-unpinned
   - name: LINUXNEXTVMIMAGE
     value: ubuntu-22.04
   - name: WINDOWSVMIMAGE
