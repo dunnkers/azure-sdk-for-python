@@ -58,11 +58,7 @@ steps:
   - pwsh: |
       which python
 
-      Remove-Item -Recurse -Force -ErrorAction SilentlyContinue /opt/hostedtoolcache/Python/
-      
-      if (Test-Path /opt/hostedtoolcache/Python) {
-        Get-ChildItem /opt/hostedtoolcache/Python
-      }
+      Get-ChildItem -R $(Build.SourcesDirectory)/venv
 
       python -m pip install --force -r eng/ci_tools.txt
       python -m pip freeze --all
