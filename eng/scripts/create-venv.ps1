@@ -26,6 +26,7 @@ if (!(Test-Path $venvPath)) {
     python -m venv "$venvPath"
     Write-Host "Virtual environment '$VenvName' created."
     Write-Host "##vso[task.setvariable variable=$($VenvName)_LOCATION]$venvPath"
+    Write-Host "##vso[task.setvariable variable=PYTHONHOME]$venvPath"
 }
 else {
     Write-Host "Virtual environment '$VenvName' already exists. Skipping creation."
