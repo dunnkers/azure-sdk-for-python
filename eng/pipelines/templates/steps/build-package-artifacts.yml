@@ -57,17 +57,13 @@ steps:
 
   - pwsh: |
       which python
+
+      Remove-Item -Recurse -Force -ErrorAction SilentlyContinue /opt/hostedtoolcache/Python/
+      Get-ChildItem /opt/hostedtoolcache/Python
+
       python -m pip install --force -r eng/ci_tools.txt
       python -m pip freeze --all
-      # Get all environment variables
-      $envVars = Get-ChildItem -Path Env:
-
-      # Loop through each environment variable and print its name and value
-      foreach ($envVar in $envVars) {
-          Write-Output "$($envVar.Name)=$($envVar.Value)"
-      }
     displayName: 'Prep Environment'
-
 
   - pwsh: |
       which python
@@ -79,7 +75,7 @@ steps:
       foreach ($envVar in $envVars) {
           Write-Output "$($envVar.Name)=$($envVar.Value)"
       }
-    displayName: 'Prep Environment'
+    displayName: 'Dump Environment Variables'
 
   - template: set-dev-build.yml@self
     parameters:
