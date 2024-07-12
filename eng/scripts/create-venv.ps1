@@ -23,7 +23,7 @@ param(
 $venvPath = Join-Path $RepoRoot $VenvName
 if (!(Test-Path $venvPath)) {
     Write-Host "Creating virtual environment '$VenvName'."
-    python -m pip install virtualenv
+    python -m pip install --force virtualenv==20.25.1
     python -m virtualenv "$venvPath"
     Write-Host "Virtual environment '$VenvName' created."
     Write-Host "##vso[task.setvariable variable=$($VenvName)_LOCATION]$venvPath"
