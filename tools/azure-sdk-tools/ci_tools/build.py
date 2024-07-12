@@ -191,5 +191,6 @@ def create_package(
     if enable_sdist:
         logger.log(level=logging.INFO, msg=f"Setuptools version: {setuptools.__version__}")
         logger.log(level=logging.INFO, msg=f"Setuptools imported from: {setuptools.__file__}")
+        logger.log(level=logging.INFO, msg=f"invoking from {sys.executable}")
 
         run([sys.executable, "setup.py", "sdist", "-d", dist], cwd=setup_parsed.folder, check=True)
