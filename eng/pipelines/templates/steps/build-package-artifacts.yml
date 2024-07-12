@@ -55,25 +55,26 @@ steps:
   # - ${{ if eq(parameters.UseVirtualEnvironment, true) }}:
   #   - template: /eng/pipelines/templates/steps/use-venv.yml
 
-  - pwsh: |
+  - script: |
       which python
       python -m pip install virtualenv==20.25.1
       python -m virtualenv venv
       source venv/bin/activate
       python -m pip install --force -r eng/ci_tools.txt
+      python -m pip freeze --all
     displayName: 'Prep Environment'
 
-  - pwsh: |
-      which python
-      python -m pip freeze --all
+  # - pwsh: |
+  #     which python
+  #     python -m pip freeze --all
       
-      $envVars = Get-ChildItem -Path Env:
+  #     $envVars = Get-ChildItem -Path Env:
 
-      # Loop through each environment variable and print its name and value
-      foreach ($envVar in $envVars) {
-          Write-Output "$($envVar.Name)=$($envVar.Value)"
-      }
-    displayName: 'Dump Environment Variables'
+  #     # Loop through each environment variable and print its name and value
+  #     foreach ($envVar in $envVars) {
+  #         Write-Output "$($envVar.Name)=$($envVar.Value)"
+  #     }
+  #   displayName: 'Dump Environment Variables'
 
   - template: set-dev-build.yml@self
     parameters:
