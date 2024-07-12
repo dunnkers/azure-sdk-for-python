@@ -8,7 +8,9 @@ steps:
       $(Build.SourcesDirectory)/eng/scripts/create-venv.ps1 `
         -VenvName "${{ parameters.VirtualEnvironmentName }}" `
         -RepoRoot "$(Build.SourcesDirectory)"
-    displayName: Create virtual environment
+    displayName: Create virtual 
+    env:
+      VIRTUALENV_SETUPTOOLS: 69.2.0
 
   - pwsh: |
       $(Build.SourcesDirectory)/eng/scripts/activate-venv.ps1 `
