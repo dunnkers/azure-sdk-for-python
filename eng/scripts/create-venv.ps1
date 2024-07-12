@@ -23,10 +23,10 @@ param(
 $venvPath = Join-Path $RepoRoot $VenvName
 if (!(Test-Path $venvPath)) {
     Write-Host "Creating virtual environment '$VenvName'."
-    python -m venv "$venvPath"
+    python -m pip install virtualenv
+    python -m virtualenv "$venvPath"
     Write-Host "Virtual environment '$VenvName' created."
     Write-Host "##vso[task.setvariable variable=$($VenvName)_LOCATION]$venvPath"
-    Write-Host "##vso[task.setvariable variable=PYTHONHOME]$venvPath"
 }
 else {
     Write-Host "Virtual environment '$VenvName' already exists. Skipping creation."

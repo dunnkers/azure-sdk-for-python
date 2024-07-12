@@ -1,6 +1,6 @@
 # requirements leveraged by ci tools
 setuptools==69.1.1; python_version >= '3.5'
-virtualenv==20.24.3
+virtualenv==20.26.3
 wheel==0.43.0
 packaging==23.1
 tox==4.5.0

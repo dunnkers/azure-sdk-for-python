@@ -57,9 +57,6 @@ steps:
 
   - pwsh: |
       which python
-
-      Get-ChildItem -R $(Build.SourcesDirectory)/venv
-
       python -m pip install --force -r eng/ci_tools.txt
       python -m pip freeze --all
     displayName: 'Prep Environment'
