@@ -76,6 +76,7 @@ class TestAppConfigurationClient(AppConfigTestCase):
                 )
             )
         client.delete_configuration_setting(key=created_kv.key, label=created_kv.label)
+        assert(1 == 0)
 
     # method: set_configuration_setting
     @app_config_decorator
