@@ -79,9 +79,9 @@ steps:
         azurePowerShellVersion: LatestVersion
         pwsh: true
         ScriptType: InlineScript
-        Inline: >-
-          Write-Host "Before VENV Activation $($env:AZURESUBSCRIPTION_CLIENT_ID)"
-          Write-Host "Before VENV Activation $($env:AZURESUBSCRIPTION_TENANT_ID)"
+        Inline: |
+          Write-Host "Before VENV Activation $($env:AZURESUBSCRIPTION_CLIENT_ID)";
+          Write-Host "Before VENV Activation $($env:AZURESUBSCRIPTION_TENANT_ID)";
 
           Write-Host (Get-Command python).Source
           $account = (Get-AzContext).Account;
@@ -90,23 +90,26 @@ steps:
 
           if ($IsWindows) {
             . $(VENV_LOCATION)/Scripts/Activate.ps1
+            cat $(VENV_LOCATION)/Scripts/Activate.ps1
           }
           else {
             . $(VENV_LOCATION)/bin/activate.ps1
+            cat $(VENV_LOCATION)/bin/activate.ps1
           }
 
           Write-Host "After VENV Activation $($env:AZURESUBSCRIPTION_CLIENT_ID)";
           Write-Host "After VENV Activation $($env:AZURESUBSCRIPTION_TENANT_ID)";
 
-          python scripts/devops_tasks/dispatch_tox.py
-          "$(TargetingString)"
-          ${{ parameters.AdditionalTestArgs }}
-          ${{ parameters.CoverageArg }}
-          --mark_arg="${{ parameters.TestMarkArgument }}"
-          --service="${{ parameters.ServiceDirectory }}"
-          --toxenv="${{ parameters.ToxTestEnv }}"
-          --injected-packages="${{ parameters.InjectedPackages }}"
-          ${{ parameters.ToxEnvParallel }};
+          python scripts/devops_tasks/dispatch_tox.py `
+            "$(TargetingString)" `
+            ${{ parameters.AdditionalTestArgs }} `
+            ${{ parameters.CoverageArg }} `
+            --mark_arg="${{ parameters.TestMarkArgument }}" `
+            --service="${{ parameters.ServiceDirectory }}" `
+            --toxenv="${{ parameters.ToxTestEnv }}" `
+            --injected-packages="${{ parameters.InjectedPackages }}" `
+            ${{ parameters.ToxEnvParallel }};
+
           Write-Host "Last exit code: $LASTEXITCODE";
           exit $LASTEXITCODE;
 
